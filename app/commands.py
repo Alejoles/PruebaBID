@@ -2,15 +2,26 @@ import requests
 from constants import API_URL, COUNTRIES, YEARS
 
 class Singleton(type):
+
     _instances = {}
+
     def __call__(cls, *args, **kwargs):
+        """
+        Possible changes to the value of the `__init__` argument do not affect
+        the returned instance.
+        """
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            instance = super().__call__(*args, **kwargs)
+            cls._instances[cls] = instance
         return cls._instances[cls]
 
-class MacroFiscalData:
-
-    __metaclass__ = Singleton
+class MacroFiscalData(metaclass=Singleton):
+    """
+        Class that contains all the methods to do requests to
+        the World Bank API, also is a singleton class which
+        allow us to have only one instance of variables in
+        the execution of the program.
+    """
 
     gdp = {}
     inflation = {}
@@ -27,7 +38,7 @@ class MacroFiscalData:
 
     def get_gdp_pca(self):
         """
-            This function brings gross domestic product per capita in US$ data from the world bank in format json
+            This method brings gross domestic product per capita in US$ data from the world bank in format json
             Output:
                 -
         """
@@ -46,7 +57,7 @@ class MacroFiscalData:
 
 
     def get_inflation(self):
-        """ This function brings inflation in annual % data from the world bank in format json"""
+        """ This method brings inflation in annual % data from the world bank in format json"""
         for country in COUNTRIES.values():
             url = f"{API_URL}country/{country}/indicator/FP.CPI.TOTL.ZG?format=json"
             resp = requests.get(url)
@@ -62,7 +73,7 @@ class MacroFiscalData:
 
 
     def get_uem(self):
-        """ This function brings unemployment in % of total labor force data from the world bank in format json"""
+        """ This method brings unemployment in % of total labor force data from the world bank in format json"""
         for country in COUNTRIES.values():
             url = f"{API_URL}country/{country}/indicators/SL.UEM.TOTL.ZS?format=json"
             resp = requests.get(url)
@@ -80,7 +91,7 @@ class MacroFiscalData:
     """ ------------------- Fiscal Data From here -------------------"""
 
     def get_public_debt(self):
-        """ This function brings central government debt in % of GDP data from the world bank in format json"""
+        """ This method brings central government debt in % of GDP data from the world bank in format json"""
         for country in COUNTRIES.values():
             url = f"{API_URL}country/{country}/indicator/GC.DOD.TOTL.GD.ZS?format=json"
             resp = requests.get(url)
@@ -95,7 +106,7 @@ class MacroFiscalData:
         MacroFiscalData.debt["Currency"] = "% of GDP"
 
     def get_incomes(self):
-        """ This function brings the gross national income in US$ data from the world bank in format json"""
+        """ This method brings the gross national income in US$ data from the world bank in format json"""
         for country in COUNTRIES.values():
             url = f"{API_URL}country/{country}/indicator/NY.GNP.MKTP.CD?format=json"
             resp = requests.get(url)
@@ -110,7 +121,7 @@ class MacroFiscalData:
         MacroFiscalData.incomes["Currency"] = "US$"
 
     def get_tax_expenses(self):
-        """ This function brings tax expenses in % of GDP data from the world bank in format json"""
+        """ This method brings tax expenses in % of GDP data from the world bank in format json"""
         for country in COUNTRIES.values():
             url = f"{API_URL}country/{country}/indicator/GC.XPN.TOTL.GD.ZS?format=json"
             resp = requests.get(url)

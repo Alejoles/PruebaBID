@@ -102,27 +102,135 @@ app.layout = html.Div(
     Input("country-filter", "value"),
     Input("type-filter", "value"),
 )
-def update_chart(country, request_type):
-    print(country, request_type)
+def update_chart(countries, request_type):
+    """
+        Callback function to update the graph in the front.
+    """
     data = MacroFiscalData()
-    if request_type == "Macro - Gross Domestic Product":
-        gdp = data.gdp[country[0]] #TODO: solo graficar colombia
-        print(gdp)
+    if request_type == "Macro - Gross Domestic Product": #TODO: Comment each if
+        gdp = data.gdp
+        graphs = []
+        for i in countries:
+            graphs.append({
+                    "x": list(gdp[i].keys()),
+                    "y": list(gdp[i].values()),
+                    "type": "lines",
+                    "hovertemplate": "$%{y:.2f}<extra></extra>",
+                })
         gdp_chart_figure = {
-            "data": [
-                {
-                    "x": list(gdp.keys()),
-                    "y": list(gdp.values()),
+            "data": graphs,
+            "layout": {
+                "title": {
+                    "text": "Gross Domestic Product Per Capita",
+                    "x": 0.05,
+                    "xanchor": "left",
+                },
+                "xaxis": {"fixedrange": True},
+                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+            },
+        }
+    if request_type == "Macro - Inflation":
+        if data.inflation == {}:
+            data.get_inflation()
+        macrofiscal = data.inflation
+        graphs = []
+        for i in countries:
+            graphs.append({
+                    "x": list(macrofiscal[i].keys()),
+                    "y": list(macrofiscal[i].values()),
                     "type": "lines",
                     "hovertemplate": "$%{y:.2f}<extra></extra>",
+                })
+        gdp_chart_figure = {
+            "data": graphs,
+            "layout": {
+                "title": {
+                    "text": "Gross Domestic Product Per Capita",
+                    "x": 0.05,
+                    "xanchor": "left",
                 },
-                {
-                    "x": list(data.gdp[country[1]].keys()),
-                    "y": list(data.gdp[country[1]].values()),
+                "xaxis": {"fixedrange": True},
+                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+            },
+        }
+    if request_type == "Macro - Unemployment":
+        if data.unemploy == {}:
+            data.get_uem()
+        macrofiscal = data.unemploy
+        graphs = []
+        for i in countries:
+            graphs.append({
+                    "x": list(macrofiscal[i].keys()),
+                    "y": list(macrofiscal[i].values()),
                     "type": "lines",
                     "hovertemplate": "$%{y:.2f}<extra></extra>",
+                })
+        gdp_chart_figure = {
+            "data": graphs,
+            "layout": {
+                "title": {
+                    "text": "Gross Domestic Product Per Capita",
+                    "x": 0.05,
+                    "xanchor": "left",
                 },
-            ],
+                "xaxis": {"fixedrange": True},
+                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+            },
+        }
+    if request_type == "Fiscal - Central Gov Debt":
+        if data.debt == {}:
+            data.get_public_debt()
+        macrofiscal = data.debt
+        graphs = []
+        for i in countries:
+            graphs.append(
+                    go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()))
+                )
+        gdp_chart_figure = {
+            "data": graphs,
+            "layout": {
+                "title": {
+                    "text": "Gross Domestic Product Per Capita",
+                    "x": 0.05,
+                    "xanchor": "left",
+                },
+                "xaxis": {"fixedrange": True},
+                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+            },
+        }
+    if request_type == "Fiscal - Gross National Income":
+        if data.incomes == {}:
+            data.get_incomes()
+        macrofiscal = data.incomes
+        graphs = []
+        for i in countries:
+            graphs.append(
+                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()))
+            )
+        gdp_chart_figure = {
+            "data": graphs,
+            "layout": {
+                "title": {
+                    "text": "Gross Domestic Product Per Capita",
+                    "x": 0.05,
+                    "xanchor": "left",
+                },
+                "xaxis": {"fixedrange": True},
+                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+                "legend" :{"asd":"asd"}
+            },
+        }
+    if request_type == "Fiscal - Tax Expenses":
+        if data.expenses == {}:
+            data.get_tax_expenses()
+        macrofiscal = data.expenses
+        graphs = []
+        for i in countries:
+            graphs.append(
+                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()))
+            )
+        gdp_chart_figure = {
+            "data": graphs,
             "layout": {
                 "title": {
                     "text": "Gross Domestic Product Per Capita",
