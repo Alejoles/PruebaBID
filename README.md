@@ -3,7 +3,7 @@
 ---
 # About the Project.
 
-Prueba de ingreso para el BID. Se debe desarrollar un dashboard #TODO: traducir
+Macro-Fiscal Dashboard that shows data grabbed from an API.
 
 ## Dependencies.
 
@@ -43,8 +43,11 @@ Third party API: https://datahelpdesk.worldbank.org/knowledgebase/articles/88939
 
 # Execution of Project.
 
-### Run Project.
+## Run Project.
 
+Configure the .env file first. As showed Above, the env.example is a great help for this.
+
+### Docker
 
 - **First step:**
 Be sure to have docker installed and running. Check docker installation.
@@ -62,6 +65,56 @@ Go to your browser and type:
     ```bash
     http://localhost:8050
     ```
+
+### Venv
+
+- **First step:**
+Run
+
+    ```bash
+    python -m venv venv
+    ```
+    OR
+
+    ```bash
+    virtualenv venv
+    ```
+
+- **Second step:**
+Run the next command:
+
+    ```bash
+    source venv/bin/activate
+    ```
+    This command will enter inside the virtual environment.
+    To exit just type in your bash.
+
+    ```bash
+    deactivate
+    ```
+
+- **Third step:**
+Install the requirements inside the virtualenv with
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+- **Fourth step:**
+Run the project
+
+    ```bash
+    python app/app.py
+    ```
+
+
+- **Fifth step:**
+Go to your browser and type:
+
+    ```bash
+    http://localhost:8050
+    ```
+
 
 ---
 

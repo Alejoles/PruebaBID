@@ -105,9 +105,17 @@ app.layout = html.Div(
 def update_chart(countries, request_type):
     """
         Callback function to update the graph in the front.
+        Returns the chart that is going to be showed in the front.
+        Inputs:
+            - countries: Is an input showed in the front that brings
+                         the countries to us.
+            - request_type: Another input that selects which of the
+                            macrofiscal data will be used.
+        Output:
+            - A graph showing the requested data.
     """
     data = MacroFiscalData()
-    if request_type == "Macro - Gross Domestic Product": #TODO: Comment each if
+    if request_type == "Macro - Gross Domestic Product": # Each if represents which data set will be used
         gdp = data.gdp
         graphs = []
         for i in countries:
@@ -116,12 +124,13 @@ def update_chart(countries, request_type):
                     "y": list(gdp[i].values()),
                     "type": "lines",
                     "hovertemplate": "$%{y:.2f}<extra></extra>",
+                    "name": str(i)
                 })
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
                 "title": {
-                    "text": "Gross Domestic Product Per Capita",
+                    "text": "Gross Domestic Product Per Capita (US$)",
                     "x": 0.05,
                     "xanchor": "left",
                 },
@@ -140,17 +149,18 @@ def update_chart(countries, request_type):
                     "y": list(macrofiscal[i].values()),
                     "type": "lines",
                     "hovertemplate": "$%{y:.2f}<extra></extra>",
+                    "name": str(i)
                 })
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
                 "title": {
-                    "text": "Gross Domestic Product Per Capita",
+                    "text": "Inflation (Annual %)",
                     "x": 0.05,
                     "xanchor": "left",
                 },
                 "xaxis": {"fixedrange": True},
-                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+                "yaxis": {"tickprefix": str(data.inflation["Currency"]), "fixedrange": True},
             },
         }
     if request_type == "Macro - Unemployment":
@@ -164,17 +174,18 @@ def update_chart(countries, request_type):
                     "y": list(macrofiscal[i].values()),
                     "type": "lines",
                     "hovertemplate": "$%{y:.2f}<extra></extra>",
+                    "name": str(i)
                 })
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
                 "title": {
-                    "text": "Gross Domestic Product Per Capita",
+                    "text": "Unemployment (% of total labor force)",
                     "x": 0.05,
                     "xanchor": "left",
                 },
                 "xaxis": {"fixedrange": True},
-                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+                "yaxis": {"tickprefix": str(data.unemploy["Currency"]), "fixedrange": True},
             },
         }
     if request_type == "Fiscal - Central Gov Debt":
@@ -184,18 +195,18 @@ def update_chart(countries, request_type):
         graphs = []
         for i in countries:
             graphs.append(
-                    go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()))
+                    go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()), name=str(i))
                 )
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
                 "title": {
-                    "text": "Gross Domestic Product Per Capita",
+                    "text": "Central Government debt (% of GDP)",
                     "x": 0.05,
                     "xanchor": "left",
                 },
                 "xaxis": {"fixedrange": True},
-                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+                "yaxis": {"tickprefix": str(data.debt["Currency"]), "fixedrange": True},
             },
         }
     if request_type == "Fiscal - Gross National Income":
@@ -205,18 +216,18 @@ def update_chart(countries, request_type):
         graphs = []
         for i in countries:
             graphs.append(
-                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()))
+                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()), name=str(i))
             )
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
                 "title": {
-                    "text": "Gross Domestic Product Per Capita",
+                    "text": "Gross National Income (US$)",
                     "x": 0.05,
                     "xanchor": "left",
                 },
                 "xaxis": {"fixedrange": True},
-                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+                "yaxis": {"tickprefix": str(data.incomes["Currency"]), "fixedrange": True},
                 "legend" :{"asd":"asd"}
             },
         }
@@ -227,18 +238,18 @@ def update_chart(countries, request_type):
         graphs = []
         for i in countries:
             graphs.append(
-                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()))
+                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()), name=str(i))
             )
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
                 "title": {
-                    "text": "Gross Domestic Product Per Capita",
+                    "text": "Expense (% of GDP)",
                     "x": 0.05,
                     "xanchor": "left",
                 },
                 "xaxis": {"fixedrange": True},
-                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+                "yaxis": {"tickprefix": str(data.expenses["Currency"]), "fixedrange": True},
             },
         }
 
@@ -246,5 +257,6 @@ def update_chart(countries, request_type):
 
 
 if __name__ == '__main__':
+    # Running the server
     app.run_server(host='0.0.0.0', port=8050, debug=True)
 
