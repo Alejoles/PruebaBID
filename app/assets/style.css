@@ -1,0 +1,103 @@
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    background-color: #F7F7F7;
+}
+
+.header {
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.header-emoji {
+    width: 60px;
+    height: auto;
+    margin: 10px;
+}
+
+.header-title {
+    color: #FFFFFF;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.header-description {
+    color: #CFCFCF;
+    margin-top: 10px;
+    margin-bottom: 80px;
+    text-align: center;
+    max-width: 384px;
+}
+
+.wrapper {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card {
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+}
+
+.menu {
+    height: 112px;
+    width: 452px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 24px;
+    margin: -60px auto 0 auto;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+    display: flex;
+}
+
+
+.Select-control {
+    width: 256px;
+    height: 48px;
+}
+
+.Select--single>.Select-control .Select-value,
+.Select-placeholder {
+    line-height: 48px;
+}
+
+.Select--multi .Select-value-label {
+    line-height: 32px;
+}
+
+.menu-title {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #079A82;
+}
+
+.side-menu {
+    height: 452px;
+    width: 162px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+    font-size: 22px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.checklist {
+    padding-top: 30px;
+}
+
+.flags {
+    width: 20px;
+    height: auto;
+}
