@@ -16,16 +16,6 @@ external_stylesheets = [
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "Macro-Economic Dashboard"
 
-# Datos para los gráficos de barras
-x_data = ['Categoria 1', 'Categoria 2', 'Categoria 3']
-y_data_1 = [10, 20, 15]
-y_data_2 = [15, 25, 35]
-y_data_3 = [12, 18, 25]
-
-# Crear las figuras de los gráficos de barras
-fig1 = go.Figure(data=[go.Bar(x=x_data, y=y_data_1)])
-fig2 = go.Figure(data=[go.Bar(x=x_data, y=y_data_2)])
-fig3 = go.Figure(data=[go.Bar(x=x_data, y=y_data_3)])
 
 # Diseño de la interfaz con estilos CSS
 app.layout = html.Div(
@@ -39,7 +29,7 @@ app.layout = html.Div(
                 html.P(
                     children=(
                         "Analyze the behavior of macrofiscal changes in Latam"
-                        " between 2018 and 2022"
+                        " between 2002 and 2021"
                     ),
                     className="header-description",
                 ),

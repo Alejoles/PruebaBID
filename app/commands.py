@@ -21,21 +21,35 @@ class MacroFiscalData:
         self.incomes = {}
         self.expenses = {}
 
+        # Obtaining GDP
+        for i in COUNTRIES:
+            pass
+
     """------------------- Macro economics Data From here -------------------"""
 
     def get_gdp_pca(self, country:str, year:str):
-        """ This function brings gross domestic product per capita in US$ data from the world bank in format json"""
+        """
+            This function brings gross domestic product per capita in US$ data from the world bank in format json
+            Inputs:
+                - *country* a string to make the request to the API.
+                - *year* a string that indicates the year to search.
+            Output:
+                -
+        """
         url = f"{API_URL}country/{country}/indicator/NY.GDP.PCAP.CD?format=json"
         resp = requests.get(url)
         data = resp.json()
 
+        self.gdp[country] = []
         for entry in data[1]:
             if entry["value"] == None:
                 print(f"Error, country {country} with year selected has not value of UEM yet,\
                         try another year or select a different country")
                 return
-            if entry["date"] == str(year):
-                return country, str(year), entry["value"], "US$"
+            if entry["date"] == ("2018" or "2019" or "2020" or "2021" or "2022"): #TODO: poder retornar todos los de las fechas.
+                self.gdp[country].append({entry["date"]: entry["value"]})
+
+        self.gdp["Currency"] = "US$"
 
 
     def get_inflation(self, country:str, year:str):
