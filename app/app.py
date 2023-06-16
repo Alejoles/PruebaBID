@@ -86,7 +86,7 @@ app.layout = html.Div(
                 html.Div(
                     children=dcc.Graph(
                         id="gdp-chart",
-                        config={"displayModeBar": False},
+                        #config={"displayModeBar": False},
                         style={'width': '80vw'}
                     ),
                     className="card",
@@ -104,8 +104,36 @@ app.layout = html.Div(
 )
 def update_chart(country, request_type):
     print(country, request_type)
-    MacroFiscalData
-    gdp_chart_figure = ""
+    data = MacroFiscalData()
+    if request_type == "Macro - Gross Domestic Product":
+        gdp = data.gdp[country[0]] #TODO: solo graficar colombia
+        print(gdp)
+        gdp_chart_figure = {
+            "data": [
+                {
+                    "x": list(gdp.keys()),
+                    "y": list(gdp.values()),
+                    "type": "lines",
+                    "hovertemplate": "$%{y:.2f}<extra></extra>",
+                },
+                {
+                    "x": list(data.gdp[country[1]].keys()),
+                    "y": list(data.gdp[country[1]].values()),
+                    "type": "lines",
+                    "hovertemplate": "$%{y:.2f}<extra></extra>",
+                },
+            ],
+            "layout": {
+                "title": {
+                    "text": "Gross Domestic Product Per Capita",
+                    "x": 0.05,
+                    "xanchor": "left",
+                },
+                "xaxis": {"fixedrange": True},
+                "yaxis": {"tickprefix": str(data.gdp["Currency"]), "fixedrange": True},
+            },
+        }
+
     return gdp_chart_figure
 
 
