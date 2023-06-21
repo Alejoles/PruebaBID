@@ -193,10 +193,36 @@ def update_chart(countries, request_type):
             data.get_public_debt()
         macrofiscal = data.debt
         graphs = []
-        for i in countries:
+        mean = {
+        "2021":0, "2020":0, "2019":0, "2018":0, "2017":0,
+        "2016":0, "2015":0, "2014":0, "2013":0, "2012":0,
+        "2011":0, "2010":0, "2009":0, "2008":0, "2007":0,
+        "2006":0, "2005":0, "2004":0, "2003":0, "2002":0,
+        }
+        divider = {
+        "2021":0, "2020":0, "2019":0, "2018":0, "2017":0,
+        "2016":0, "2015":0, "2014":0, "2013":0, "2012":0,
+        "2011":0, "2010":0, "2009":0, "2008":0, "2007":0,
+        "2006":0, "2005":0, "2004":0, "2003":0, "2002":0,
+        }
+        if 'CO' in countries:
             graphs.append(
-                    go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()), name=str(i))
-                )
+                        go.Bar(x=list(macrofiscal['CO'].keys()), y=list(macrofiscal['CO'].values()), name=str('CO'))
+                    )
+        for i in countries:
+            if i == 'CO':
+                continue
+            else:
+                for j in macrofiscal[i].keys():
+                    divider[j] += 1
+                    mean[j] += macrofiscal[i][j]
+        for k in mean.keys():
+            if divider[k] != 0:
+                mean[k] = mean[k]/divider[k]
+        print(mean)
+        graphs.append(
+                        go.Bar(x=list(mean.keys()), y=list(mean.values()), name=str('Mean'))
+                    )
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
@@ -214,10 +240,36 @@ def update_chart(countries, request_type):
             data.get_incomes()
         macrofiscal = data.incomes
         graphs = []
-        for i in countries:
+        mean = {
+        "2021":0, "2020":0, "2019":0, "2018":0, "2017":0,
+        "2016":0, "2015":0, "2014":0, "2013":0, "2012":0,
+        "2011":0, "2010":0, "2009":0, "2008":0, "2007":0,
+        "2006":0, "2005":0, "2004":0, "2003":0, "2002":0,
+        }
+        divider = {
+        "2021":0, "2020":0, "2019":0, "2018":0, "2017":0,
+        "2016":0, "2015":0, "2014":0, "2013":0, "2012":0,
+        "2011":0, "2010":0, "2009":0, "2008":0, "2007":0,
+        "2006":0, "2005":0, "2004":0, "2003":0, "2002":0,
+        }
+        if 'CO' in countries:
             graphs.append(
-                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()), name=str(i))
-            )
+                        go.Bar(x=list(macrofiscal['CO'].keys()), y=list(macrofiscal['CO'].values()), name=str('CO'))
+                    )
+        for i in countries:
+            if i == 'CO':
+                continue
+            else:
+                for j in macrofiscal[i].keys():
+                    divider[j] += 1
+                    mean[j] += macrofiscal[i][j]
+        for k in mean.keys():
+            if divider[k] != 0:
+                mean[k] = mean[k]/divider[k]
+        print(mean)
+        graphs.append(
+                        go.Bar(x=list(mean.keys()), y=list(mean.values()), name=str('Mean'))
+                    )
         gdp_chart_figure = {
             "data": graphs,
             "layout": {
@@ -236,10 +288,36 @@ def update_chart(countries, request_type):
             data.get_tax_expenses()
         macrofiscal = data.expenses
         graphs = []
-        for i in countries:
+        mean = {
+        "2021":0, "2020":0, "2019":0, "2018":0, "2017":0,
+        "2016":0, "2015":0, "2014":0, "2013":0, "2012":0,
+        "2011":0, "2010":0, "2009":0, "2008":0, "2007":0,
+        "2006":0, "2005":0, "2004":0, "2003":0, "2002":0,
+        }
+        divider = {
+        "2021":0, "2020":0, "2019":0, "2018":0, "2017":0,
+        "2016":0, "2015":0, "2014":0, "2013":0, "2012":0,
+        "2011":0, "2010":0, "2009":0, "2008":0, "2007":0,
+        "2006":0, "2005":0, "2004":0, "2003":0, "2002":0,
+        }
+        if 'CO' in countries:
             graphs.append(
-                go.Bar(x=list(macrofiscal[i].keys()), y=list(macrofiscal[i].values()), name=str(i))
-            )
+                        go.Bar(x=list(macrofiscal['CO'].keys()), y=list(macrofiscal['CO'].values()), name=str('CO'))
+                    )
+        for i in countries:
+            if i == 'CO':
+                continue
+            else:
+                for j in macrofiscal[i].keys():
+                    divider[j] += 1
+                    mean[j] += macrofiscal[i][j]
+        for k in mean.keys():
+            if divider[k] != 0:
+                mean[k] = mean[k]/divider[k]
+        print(mean)
+        graphs.append(
+                        go.Bar(x=list(mean.keys()), y=list(mean.values()), name=str('Mean'))
+                    )
         gdp_chart_figure = {
             "data": graphs,
             "layout": {

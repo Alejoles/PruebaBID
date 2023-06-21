@@ -12,6 +12,7 @@ Third party API: https://datahelpdesk.worldbank.org/knowledgebase/articles/88939
 ## Technologies that are used.
 
 - Python
+- Dash (Python)
 - Docker
 
 ---
